@@ -1,0 +1,8 @@
+<el-image>标签和<img>标签的区别：
+img
+<img src="@/assets/images/manualPic/login.png"/>
+<el-image>
+<el-image :src="require('@/assets/images/manualPic/login.png')" fit="fill"></el-image>
+<el-image>需要引用require引入,属性fit的值可以是：fill / contain / cover / none / scale-down
+                                                                                                                                                                                                                                                                                                                      -
+
