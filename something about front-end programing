@@ -94,25 +94,85 @@ JavaScript中的数据类型：数字（number）、字符串（string）、布�
 查看变量类型：console.log（typeof a）
 null、NaN、0、''、undefined都被if语句判断为false
 ===与==的区别：二者都是用于判断，===更加严格，如'1'==1为true，'1'===1为false
+SetTimeout是过一段时间触发时间，SetInterval是每过一段时间就触发一次事件
+SetInterval会返回一个计时器的id，该id用来标识该计时器以让ClearInterval找到想要清除的计时器
+SetTimeout即使是设定成0秒触发也一定会慢于直接写在主体函数中的语句
+
+判断一个数为整型：Number.isInterger(a),若a=1，返回true，若a=1.1，则返回false
+转换整型的方法为：parseInt('1.5')=1,parseInt('1a')=1,parseInt(a1)=NaN
+转为浮点数parseFloat('1')=1,parseFloat('1.1')=1.1,parseFloat('1.1a')=1.1,parseFloat(a1.1)=NaN,parseFloat('.1')=0.1
+判断是否为NaN：isNaN(1)为false，isNaN（0/0）为true
+在其他类型前加一个'+'可将其转换为数字类型：+'1'为1，+''为0，+'1.1'为1.1，+true为1，+false为0
+
+获得字符串中的某一字符：'hello'.charAt(0)为'h','hello'.charAt(1)为'e',另外'hello'[0]为'h'
+检查一段字符串是否包含另一段字符串：'hello world'.includes（'hello'）为true
+用字符串将字符串分割为数组'hello|world'.split('|')为['hello','world']
+连接字符串：'h'.concat('ello',' ','world')为'hello world'
+截取字符串:'hello world'.slice(6)为'world',
+去除字符串两头的空格:'  hello  '.trim为'hello'
+
+对象中可以嵌套对象：
+var object1={
+           property1：1，
+           property2：2，
+           property3：{
+                      subproperty1：1
+                      subproperty2：2
+           }
+}
+通过 .来获取对象中的属性：object1.property3.subproperty1 或用[]：object1[property1]
+对象中的属性值可以是数字、数组、对象、布尔值、字符串、函数，基本无限制
+
+数组中的元素可以是数字、数组、对象、布尔值、字符串、函数，基本无限制
+通过.length方法可以获取数组的长度（长度即为数组中有多少个元素）：[1,2,3].length=3
+数组的一些常用方法:
+array.push(e) 从数组末尾添加新元素,返回值为修改后数组的长度
+array.unshift(e) 从数组开头添加新元素，返回值为修改后数组的长度
+array.pop() 从数组末尾删除元素，返回值为被删除的那个元素
+array.shift() 从数组开头删除元素,返回值为被删除的那个元素
+array.reverse() 将数组颠倒顺序,返回颠倒后的数组
+array.splice(从哪里剪，剪多长，替换元素1，替换元素2)，作用为剪接原数组
+array.slice(从哪里剪，在哪里停) 作用为创造一个裁剪后的新数组,返回裁剪后的新数组，对原数组无影响
+array.foreach(回调函数(元素，元素位置，原数组){具体行为})作用为迭代，回调函数的第一个参数固定为原数组中的每一个元素，第二个参数固定为那个元素的位置，第三个参数固定为原数组
+array.filter(回调函数(元素，元素位置，原数组){条件})作用为过滤,通过回调函数建立一个从原数组过滤而来的新数组
+array.every(回调函数(元素，元素位置，原数组){条件})作用为判断，若原数组中的所有元素都满足条件则返回true，否则返回false
+
+null只有在需要清空一个量时才会赋值给它。nul只能手动设置而不能有由js默认
+typeof null会返回object
+null在被判断时被认为是false
+
+undefined==null，因此undefined被判断时也返回false
+当一个变量被声明而没有被赋值时，它的值就是undefined
+
+构造函数用来构造新变量，在构造函数中用this表示表示即将定义的变量，在函数外用new来调用构造函数
+function creatFunc(name,age,gender){
+           this.name=name;
+           this.age=age;
+           this.gender=gender;
+}
+var person=new creatFunc('Dong',22,'male')
+
+
+
 
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 vue
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-1.<el-image>标签和<img>标签的区别：
+<el-image>标签和<img>标签的区别：
 img
 <img src="@/assets/images/manualPic/login.png"/>
 <el-image>
 <el-image :src="require('@/assets/images/manualPic/login.png')" fit="fill"></el-image>
 <el-image>需要引用require引入,属性fit的值可以是：fill / contain / cover / none / scale-down
                                                                                                                                                                                                                                                                                                                       -
-2.通过slot=placeholder可自定义占位内容
+通过slot=placeholder可自定义占位内容
       <el-image :src=""
       <div slot="placeholder">
       加载中...
       </div>
       </el-image>
-3.通过slot=error可自定义加载失败内容
+通过slot=error可自定义加载失败内容
     <el-image>
       <div slot="error">
       加载失败
