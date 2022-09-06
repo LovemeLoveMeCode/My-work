@@ -162,11 +162,26 @@ vue
 在{{}}中的内容可以被当作js语句来解析，但只能解析一部分内容如变量等，而不能解析如判断、循环语句等内容
 v-model是vue中自定义的属性，也称为“指令”，v-model的作用为在表单输入元素或组件上创建数据的双向绑定,v-model限于<input>,<select>,<textarea>以及components使用，
 v-model的修饰符：
-.lazy ——监听 change 事件而不是 input
+.lazy ——监听 change 事件而不是 input，change事件对于不同的元素也不相同，如input元素的change事件在鼠标点击输入栏外时触发，.lazy的一个比较常见的用法是输入账号或密码时，系统动态提示
+账号或密码是否合法或正确
 .number ——将输入的合法符串转为数字
 .trim ——移除输入内容两端空格
-
-
+v-if和v-show都可以用于控制元素的显示或隐藏，不同的是v-if若为false，则整个元素会被直接删除，而v-show若为false，则dom元素仅会被隐藏而不会被删除
+v-for用于迭代，注意v-for的迭代是动态的，向数组中添加元素时，v-for可以实时的更新其迭代的内容，v-for中添加key的主要作用是标识组件的唯一性，主要是为了更高效的更新元素
+当v-if与v-for同时使用时，v-if的优先级要更高，官方并不推荐在同一元素上同时使用这两个属性
+v-bind主要用于动态的绑定一个或多个attribute，也可以是组件的prop
+v-on用于给元素绑定事件监听器，其参数主要是某特定的方法，可以在事件发生后触发这一方法，如v-on:click="afun()"，当元素被点击时执行afun()，v-on的修饰符有：
+.stop ——调用 event.stopPropagation()。
+.prevent ——调用 event.preventDefault()。
+.capture ——在捕获模式添加事件监听器。
+.self ——只有事件从元素本身发出才触发处理函数。
+.{keyAlias} ——只在某些按键下触发处理函数。
+.once ——最多触发一次处理函数。
+.left ——只在鼠标左键事件触发处理函数。
+.right ——只在鼠标右键事件触发处理函数。
+.middle ——只在鼠标中键事件触发处理函数。
+.passive ——通过 { passive: true } 附加一个 DOM 事件
+"v-bind:"可以省略成":","v-on:"可以省略成"@"
 <el-image>标签和<img>标签的区别：
 img
 <img src="@/assets/images/manualPic/login.png"/>
