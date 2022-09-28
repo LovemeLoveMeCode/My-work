@@ -94,7 +94,7 @@ JavaScript中的数据类型：数字（number）、字符串（string）、布�
 查看变量类型：console.log（typeof a）
 null、NaN、0、''、undefined都被if语句判断为false
 ===与==的区别：二者都是用于判断，===更加严格，如'1'==1为true，'1'===1为false
-SetTimeout是过一段时间触发时间，SetInterval是每过一段时间就触发一次事件
+SetTimeout是过一段时间触发事件，SetInterval是每过一段时间就触发一次事件
 SetInterval会返回一个计时器的id，该id用来标识该计时器以让ClearInterval找到想要清除的计时器
 SetTimeout即使是设定成0秒触发也一定会慢于直接写在主体函数中的语句
 
@@ -167,7 +167,7 @@ v-model的修饰符：
 .number ——将输入的合法符串转为数字
 .trim ——移除输入内容两端空格
 v-if和v-show都可以用于控制元素的显示或隐藏，不同的是v-if若为false，则整个元素会被直接删除，而v-show若为false，则dom元素仅会被隐藏而不会被删除
-v-for用于迭代，注意v-for的迭代是动态的，向数组中添加元素时，v-for可以实时的更新其迭代的内容，v-for中添加key的主要作用是标识组件的唯一性，主要是为了更高效的更新元素
+v-for用于循环，注意v-for的循环是动态的，向数组中添加元素时，v-for可以实时的更新其循环的内容，v-for中添加key的主要作用是标识组件的唯一性，主要是为了更高效的更新元素
 当v-if与v-for同时使用时，v-if的优先级要更高，官方并不推荐在同一元素上同时使用这两个属性
 v-bind主要用于动态的绑定一个或多个attribute，也可以是组件的prop
 v-on用于给元素绑定事件监听器，其参数主要是某特定的方法，可以在事件发生后触发这一方法，如v-on:click="afun()"，当元素被点击时执行afun()，v-on的修饰符有：
@@ -201,6 +201,53 @@ img
       加载失败
       </div>
     </el-image>
+    
+通过key在父组件中用按钮刷新子组件的方法：
+<template>
+    <div>
+        <div>
+            <h1>父级</h1>
+            <button @click="handleLoad">点击重新加载子级</button>
+        </div>
+        <children :key="timer"></children>
+    </div>
+</template>
+<script>
+import children from '@/components/parent/children'
+export default {
+    name: 'parent',
+    components: { children },
+    data () {
+        return {
+            timer: ''
+        }
+    },
+    methods: {
+        handleLoad () {
+            this.timer = new Date().getTime()
+        }
+    }
+}
+</script>
+
+// 子组件
+<template>
+    <div>
+        子级
+    </div>
+</template>
+<script>
+export default {
+    name: 'children',
+    data () {
+        return {}
+    },
+    created () {
+        console.log('重新加载啦')
+    }
+}
+</script>
+
 
 
 
