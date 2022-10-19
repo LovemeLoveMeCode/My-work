@@ -152,6 +152,7 @@ function creatFunc(name,age,gender){
 }
 var person=new creatFunc('Dong',22,'male')
 
+localStorage.setItem()
 
 
 
